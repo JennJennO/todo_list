@@ -1,0 +1,28 @@
+<%- include("header") -%>
+<!-- use 'include' with scriptlet tags to call code from '.ejs' files -->
+
+<div class="box" id="heading">
+  <!-- use '<' and '%' scriptlet tags for EJS code that is not HTML -->
+  <h1> <%= listTitle %> </h1>
+</div>
+
+<div class="box">
+
+  <% newListItems.forEach(function(item) { %>
+  <form action="/delete" method="post">
+    <div class="item">
+      <input type="checkbox" name="checkbox" value="<%= item._id %>" onChange="this.form.submit()">
+      <p> <%= item.name %> </p>
+    </div>
+    <input type="hidden" name="listName" value="<%= listTitle %>"></input>
+  </form>
+  <% }) %>
+
+  <form class="todo-list" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Task" autocomplete="off">
+    <button type="submit" name="list" value="<%= listTitle %>">+</button>
+  </form>
+
+</div>
+
+<%- include("footer") -%>
